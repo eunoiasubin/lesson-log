@@ -107,7 +107,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
     mount.innerHTML = lesson.photos
-      .map((p) => `<div class="photo-placeholder"><span>${p.caption}</span></div>`)
+      .map((p) =>
+        p.url
+          ? `<figure class="photo-item"><img src="${p.url}" alt="${p.caption || ""}" loading="lazy" /><figcaption>${p.caption || ""}</figcaption></figure>`
+          : `<div class="photo-placeholder"><span>${p.caption}</span></div>`
+      )
       .join("");
   }
 

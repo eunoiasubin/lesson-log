@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>관리자 — 수업기록장</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<header class="site-header" id="siteHeader"></header>
+
+<main class="wrap admin-shell">
+  <div id="authGate"></div>
+
+  <div id="adminPanel" hidden>
+    <div class="admin-topbar">
+      <div>
+        <h1>관리자</h1>
+        <p id="adminWhoami" class="admin-whoami"></p>
+      </div>
+      <button class="icon-btn" id="signOutBtn">로그아웃</button>
+    </div>
+
+    <nav class="admin-tabs">
+      <button class="admin-tab is-active" type="button" data-tab="units">수업(단원)</button>
+      <button class="admin-tab" type="button" data-tab="lessons">차시</button>
+    </nav>
+
+    <section id="unitsTab" class="admin-tab-panel">
+      <div class="admin-list-head">
+        <h2>수업(단원) 목록</h2>
+        <button class="btn btn-primary" type="button" id="newUnitBtn">+ 새 수업 만들기</button>
+      </div>
+      <div id="unitsList" class="admin-list"></div>
+    </section>
+
+    <section id="lessonsTab" class="admin-tab-panel" hidden>
+      <div class="admin-list-head">
+        <h2>차시 목록</h2>
+        <button class="btn btn-primary" type="button" id="newLessonBtn">+ 새 차시 만들기</button>
+      </div>
+      <div id="lessonsList" class="admin-list"></div>
+    </section>
+  </div>
+</main>
+
+<div class="modal-overlay" id="unitModal" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="unitModalTitle">새 수업 만들기</h2>
+      <button class="icon-btn" type="button" id="unitModalClose">닫기</button>
+    </div>
+    <form id="unitForm" class="form-grid">
+      <div class="field">
+        <label for="unitGrade">학년</label>
+        <input type="number" id="unitGrade" min="1" max="6" required />
+      </div>
+      <div class="field">
+        <label for="unitSemester">학기</label>
+        <select id="unitSemester" required>
+          <option value="1">1학기</option>
+          <option value="2">2학기</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="unitSubject">과목</label>
+        <input type="text" id="unitSubject" placeholder="예: 과학" required />
+      </div>
+      <div class="field field-wide">
+        <label for="unitName">단원명</label>
+        <input type="text" id="unitName" placeholder="예: 지구와 바다" required />
+      </div>
+      <div class="field field-wide">
+        <label for="unitOneLiner">한 줄 소개</label>
+        <input type="text" id="unitOneLiner" placeholder="목록 카드에 보이는 문장" required />
+      </div>
+      <div class="field field-wide">
+        <label for="unitRestructureNote">단원 재구성 설명 (선택)</label>
+        <textarea id="unitRestructureNote" rows="3" placeholder="차시를 어떻게 다시 짰는지"></textarea>
+      </div>
+      <p class="field-note">대표 이미지는 4단계(사진 업로드 연결)에서 추가합니다.</p>
+      <div class="form-actions">
+        <button type="button" class="icon-btn danger-btn" id="unitDeleteBtn" hidden>이 수업 삭제</button>
+        <button type="submit" class="btn btn-primary">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="lessonModal" hidden>
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <h2 id="lessonModalTitle">새 차시 만들기</h2>
+      <button class="icon-btn" type="button" id="lessonModalClose">닫기</button>
+    </div>
+    <form id="lessonForm" class="form-grid">
+      <div class="field field-wide">
+        <label for="lessonUnit">수업(단원)</label>
+        <select id="lessonUnit" required></select>
+      </div>
+      <div class="field">
+        <label for="lessonNo">차시</label>
+        <input type="text" id="lessonNo" placeholder="예: 5/10차시" required />
+      </div>
+      <div class="field field-wide">
+        <label for="lessonTitle">차시 제목</label>
+        <input type="text" id="lessonTitle" placeholder="예: 밀물과 썰물은 왜 생길까?" required />
+      </div>
+      <div class="field">
+        <label for="lessonDate">수업일</label>
+        <input type="date" id="lessonDate" />
+      </div>
+      <div class="field field-wide">
+        <label for="lessonTarget">대상</label>
+        <input type="text" id="lessonTarget" placeholder="예: 3학년 2개 반, 44명" />
+      </div>
+
+      <div class="field field-wide">
+        <label>성취기준</label>
+        <div id="standardsRepeater" class="repeater"></div>
+      </div>
+
+      <div class="field field-wide">
+        <label for="lessonObjective">학습목표</label>
+        <textarea id="lessonObjective" rows="2" required></textarea>
+      </div>
+      <div class="field field-wide">
+        <label for="lessonMaterials">수업 자료·준비물 (선택)</label>
+        <input type="text" id="lessonMaterials" />
+      </div>
+
+      <div class="field field-wide">
+        <label>수업 흐름</label>
+        <div id="flowRepeater" class="repeater"></div>
+      </div>
+
+      <div class="field field-wide">
+        <label>사용한 수업 도구 (선택)</label>
+        <div id="toolsRepeater" class="repeater"></div>
+      </div>
+
+      <div class="field field-wide">
+        <label>자료 링크 (선택)</label>
+        <div id="fileLinksRepeater" class="repeater"></div>
+      </div>
+
+      <div class="field field-wide">
+        <label>수업 장면 사진 (선택)</label>
+        <label class="consent-check">
+          <input type="checkbox" id="photoConsent" />
+          학생 얼굴이 보이지 않거나, 보호자 동의를 받은 사진입니다.
+        </label>
+        <input type="file" id="photoFileInput" accept="image/jpeg,image/png,image/webp" multiple disabled />
+        <p class="field-note">올리기 전 자동으로 크기를 줄이고 촬영 정보(EXIF)를 지웁니다. 얼굴·이름표가 보이면 드래그해서 모자이크로 가릴 수 있습니다.</p>
+        <div id="photosThumbs" class="photo-thumbs"></div>
+      </div>
+
+      <div class="field field-wide">
+        <label for="lessonEvaluation">평가 (선택)</label>
+        <textarea id="lessonEvaluation" rows="2"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="reflectGood">잘된 점 (선택)</label>
+        <textarea id="reflectGood" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label for="reflectRegret">아쉬운 점 (선택)</label>
+        <textarea id="reflectRegret" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label for="reflectReaction">학생 반응 (선택)</label>
+        <textarea id="reflectReaction" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label for="reflectNext">다음엔 바꿀 점 (선택)</label>
+        <textarea id="reflectNext" rows="2"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="lessonTags">태그 (쉼표로 구분, 선택)</label>
+        <input type="text" id="lessonTags" placeholder="예: 시뮬레이터, 바다" />
+      </div>
+      <div class="field">
+        <label for="lessonVisibility">공개 여부</label>
+        <select id="lessonVisibility">
+          <option value="비공개">비공개(작성 중)</option>
+          <option value="공개">공개</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="icon-btn danger-btn" id="lessonDeleteBtn" hidden>이 차시 삭제</button>
+        <button type="submit" class="btn btn-primary">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="photoEditorModal" hidden>
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <h2>사진 편집 <span id="photoEditorProgress" class="field-note"></span></h2>
+      <button class="icon-btn" type="button" id="photoEditorSkip">건너뛰기</button>
+    </div>
+    <p class="field-note">학생 얼굴이나 이름표가 보이면 그 위를 드래그해 모자이크로 가려 주세요.</p>
+    <div class="photo-editor-canvas-wrap" id="photoEditorCanvasWrap">
+      <canvas id="photoEditorCanvas"></canvas>
+      <div class="photo-editor-selection" id="photoEditorSelection" hidden></div>
+    </div>
+    <div class="field">
+      <label for="photoEditorCaption">사진 설명</label>
+      <input type="text" id="photoEditorCaption" placeholder="예: 모둠별로 시뮬레이터를 조작하는 모습" />
+    </div>
+    <div class="form-actions">
+      <button type="button" class="icon-btn" id="photoEditorUndo">모자이크 되돌리기</button>
+      <button type="button" class="btn btn-primary" id="photoEditorAdd">이 사진 추가</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

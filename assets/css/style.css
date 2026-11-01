@@ -34,6 +34,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 
 body {
@@ -727,6 +728,21 @@ button {
   color: var(--ink-soft);
 }
 
+.photo-item { margin: 0; }
+.photo-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: block;
+}
+.photo-item figcaption {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
 /* 평가/성찰 */
 .reflect-grid {
   display: grid;
@@ -863,6 +879,244 @@ button {
   margin: 24px 0;
   color: var(--ink);
   font-size: 0.93rem;
+}
+
+/* ===== 관리자 ===== */
+.admin-shell {
+  padding: 40px 0 80px;
+  min-height: 60vh;
+}
+
+.auth-card {
+  max-width: 440px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 36px 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.auth-card p { color: var(--ink-soft); margin: 10px 0 22px; }
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.admin-whoami { color: var(--ink-faint); font-size: 0.9rem; margin: 2px 0 0; }
+
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+.admin-tab {
+  border: none;
+  background: none;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.admin-tab.is-active { color: var(--ink); border-bottom-color: var(--accent); }
+
+.admin-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.admin-list-head h2 { margin: 0; font-size: 1.2rem; }
+
+.admin-list { display: flex; flex-direction: column; gap: 10px; }
+.admin-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  background: var(--card);
+}
+.admin-list-item-title { font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.admin-list-item-sub { color: var(--ink-faint); font-size: 0.88rem; margin-top: 3px; }
+
+.status-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: var(--radius);
+}
+.status-pill.is-public { background: var(--accent-soft); color: var(--accent-dark); }
+.status-pill.is-draft { background: var(--redpen-soft); color: var(--redpen); }
+
+/* 모달 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(32, 48, 42, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+  z-index: 100;
+}
+.modal {
+  background: var(--paper);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 520px;
+  padding: 28px;
+}
+.modal-wide { max-width: 760px; }
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.modal-head h2 { margin: 0; font-size: 1.25rem; }
+
+/* 폼 */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-wide { grid-column: 1 / -1; }
+.field label { font-size: 0.85rem; color: var(--ink-soft); font-weight: 600; }
+.field input, .field select, .field textarea {
+  font-family: var(--font-sans);
+  font-size: 0.93rem;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  width: 100%;
+}
+.field textarea { resize: vertical; }
+.field-note { grid-column: 1 / -1; color: var(--ink-faint); font-size: 0.85rem; margin: -6px 0 0; }
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.danger-btn { border-color: var(--redpen); color: var(--redpen); }
+.danger-btn:hover { background: var(--redpen); border-color: var(--redpen); color: #fff; }
+
+/* 반복 입력 */
+.repeater { display: flex; flex-direction: column; gap: 10px; }
+.repeater-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 10px;
+  background: var(--card);
+}
+.repeater-field { flex: 1 1 140px; }
+.repeater-field--textarea { flex-basis: 220px; }
+.repeater-field input, .repeater-field select, .repeater-field textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+.repeater-remove { flex: none; align-self: center; }
+.repeater-add { align-self: flex-start; }
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .modal { padding: 20px; }
+}
+
+/* 사진 업로드 */
+.consent-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.consent-check input { width: auto; }
+
+.photo-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+.photo-thumb { width: 130px; }
+.photo-thumb img {
+  width: 130px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: block;
+}
+.photo-thumb-caption {
+  width: 100%;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  padding: 5px 7px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.photo-thumb-remove {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--redpen);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.photo-editor-canvas-wrap {
+  position: relative;
+  max-width: 100%;
+  margin: 14px 0;
+  background: var(--paper-alt);
+  border-radius: var(--radius);
+}
+.photo-editor-canvas-wrap canvas {
+  max-width: 100%;
+  display: block;
+  cursor: crosshair;
+  border-radius: var(--radius);
+}
+.photo-editor-selection {
+  position: absolute;
+  border: 2px dashed var(--redpen);
+  background: rgba(174, 59, 38, 0.22);
+  pointer-events: none;
 }
 
 /* ===== 인쇄 ===== */
