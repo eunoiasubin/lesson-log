@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>차시 상세 — 수업기록장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<header class="site-header" id="siteHeader"></header>
+
+<main>
+  <div class="lesson-head wrap">
+    <div class="lesson-breadcrumb" id="lessonBreadcrumb"></div>
+    <div class="lesson-head-top">
+      <div class="lesson-title-block">
+        <span class="card-tab card-tab--inline" id="lessonTab"></span>
+        <h1 id="lessonTitle"></h1>
+        <p class="lesson-sub" id="lessonSub"></p>
+      </div>
+      <div class="lesson-actions">
+        <button class="icon-btn" id="bookmarkBtn">북마크</button>
+        <button class="icon-btn" id="printBtn">인쇄</button>
+        <button class="icon-btn" id="copyLinkBtn">링크 복사</button>
+      </div>
+    </div>
+    <div class="lesson-tags" id="lessonTags"></div>
+  </div>
+
+  <div class="wrap lesson-layout">
+    <aside class="lesson-rail">
+      <div class="rail-block">
+        <h3>성취기준</h3>
+        <div id="standardsList"></div>
+      </div>
+      <div class="rail-block">
+        <h3>학습목표</h3>
+        <p class="rail-objective" id="objectiveText"></p>
+      </div>
+      <div class="rail-block">
+        <h3>수업 자료·준비물</h3>
+        <ul class="rail-list"><li id="materialsText"></li></ul>
+      </div>
+      <div class="rail-block">
+        <h3>수업일 · 대상</h3>
+        <ul class="rail-list"><li id="targetText"></li></ul>
+      </div>
+    </aside>
+
+    <div class="lesson-main">
+      <div class="block">
+        <h2>수업 흐름</h2>
+        <table class="flow-table">
+          <thead>
+            <tr>
+              <th class="col-stage">단계</th>
+              <th>활동</th>
+              <th>교수학습 활동</th>
+              <th class="col-min">시간</th>
+              <th>자료 및 유의점</th>
+            </tr>
+          </thead>
+          <tbody id="flowBody"></tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h2>사용한 수업 도구</h2>
+        <div id="toolsBlock"></div>
+      </div>
+
+      <div class="block">
+        <h2>첨부 자료</h2>
+        <ul class="file-list" id="filesBlock"></ul>
+      </div>
+
+      <div class="block">
+        <h2>수업 장면</h2>
+        <div class="photo-grid" id="photosBlock"></div>
+      </div>
+
+      <div class="block">
+        <h2>평가와 수업 성찰</h2>
+        <p id="evaluationText" style="margin-bottom:16px; color:var(--ink-soft);"></p>
+        <div class="reflect-grid" id="reflectGrid"></div>
+      </div>
+
+      <div class="block">
+        <h2>수정 이력</h2>
+        <ul class="history-list" id="historyBlock"></ul>
+      </div>
+
+      <div class="block" id="reviewsSection">
+        <h2>적용 후기</h2>
+        <div class="review-banner">
+          <strong>적용한 선생님 <span id="reviewCount"></span>명</strong>
+          <button class="icon-btn">후기 쓰기</button>
+        </div>
+        <div id="reviewsList"></div>
+      </div>
+
+      <div class="block" id="commentsSection">
+        <h2>댓글</h2>
+        <div id="commentsList"></div>
+        <div class="comment-form-stub">로그인한 교사만 댓글을 남길 수 있습니다. (3단계에서 연결)</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav wrap" id="lessonNav"></nav>
+</main>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/lesson.js"></script>
+</body>
+</html>

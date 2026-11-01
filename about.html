@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>소개 — 수업기록장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<header class="site-header" id="siteHeader"></header>
+
+<main>
+  <div class="about-hero wrap">
+    <h1>도구만으로는 전해지지 않는 수업을 남깁니다</h1>
+    <p style="color:var(--ink-soft); max-width: 56ch;">
+      바이브코딩으로 만든 프로그램은 교사 커뮤니티 자료실에 흩어져 있어, 어떤 수업에서 어떻게 썼는지까지는 전하기 어려웠습니다.
+      이 공간은 도구와 함께 성취기준, 학습목표, 수업 흐름, 실제 수업 장면을 과정안 한 장으로 남겨, 다른 선생님이 바로 참고할 수 있는 실천 사례로 만듭니다.
+    </p>
+  </div>
+
+  <div class="about-body wrap">
+    <h2>어떻게 함께 발전시키나요</h2>
+    <p>
+      내가 수업 하나를 기록하면, 다른 선생님이 자기 반에 적용해 보고 질문과 제안, 적용 후기를 남깁니다.
+      나는 그 피드백을 반영해 수업을 고치고, 바뀐 점을 수정 이력에 남깁니다. 자료를 한 방향으로 전달하는 데서 그치지 않고,
+      수업이 여러 교실을 거치며 더 나아지는 과정 자체를 기록으로 남기는 것이 목표입니다.
+    </p>
+
+    <h2>이 공간을 쓰는 사람</h2>
+    <table class="user-table">
+      <tr><th>나 (관리자)</th><td>수업·차시를 작성, 수정, 삭제하고 자료와 사진을 올립니다. 댓글과 후기에 답하고, 부적절한 글을 숨깁니다.</td></tr>
+      <tr><th>로그인한 교사</th><td>댓글과 적용 후기를 남기고, 마음에 드는 차시를 북마크합니다. 처음 로그인할 때 닉네임만 정하면 됩니다.</td></tr>
+      <tr><th>로그인하지 않은 방문자</th><td>차시를 찾아보고, 과정안과 댓글을 읽고, 자료를 내려받습니다.</td></tr>
+    </table>
+
+    <h2>학생 사진과 개인정보</h2>
+    <p>
+      수업 장면에는 학생이 나올 수 있어, 올리기 전 보호 장치를 거칩니다. 얼굴이 보이지 않거나 보호자 동의를 받은 사진만 올리고,
+      필요하면 얼굴·이름표 부분을 모자이크로 가린 뒤 게시합니다. 학생 이름, 학교명, 학급명은 글에 쓰지 않는 것을 원칙으로 합니다.
+    </p>
+    <div class="notice-box">
+      학생 사진 공개 전 소속 학교의 초상권·개인정보 동의 절차를 먼저 확인합니다. 구체적인 동의 절차와 처리방침 문구는 운영하면서 다듬어 갈 예정입니다.
+    </div>
+
+    <h2>회원 정보</h2>
+    <p>
+      로그인은 구글 계정으로만 받고, 받은 이메일은 저장만 하며 화면에는 닉네임만 보입니다. 실명과 학교명은 받지 않습니다.
+      마이페이지에서 회원 탈퇴를 하면 회원 정보·북마크·알림은 지워지고, 남긴 댓글은 '탈퇴한 회원'으로 표시됩니다.
+    </p>
+
+    <h2>지금 보시는 화면은</h2>
+    <p>
+      예시 데이터로 만든 1단계 화면 뼈대입니다. 로그인, 실제 글쓰기, 사진 업로드, 댓글·후기, 알림은 이후 단계에서 차례로 연결됩니다.
+    </p>
+  </div>
+</main>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => renderHeaderFooter("about"));
+</script>
+</body>
+</html>

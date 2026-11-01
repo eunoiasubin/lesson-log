@@ -1,0 +1,250 @@
+/* 1단계 화면 뼈대용 예시 데이터. 2단계에서 Firestore 호출로 교체한다. */
+
+const SITE = {
+  name: "수업기록장",
+  nameNote: "가칭",
+  tagline: "바이브코딩으로 만든 수업 도구와 실제 수업 과정을 차시별로 기록하고 나눕니다.",
+};
+
+const UNITS = [
+  {
+    id: "u1",
+    grade: 3,
+    semester: 2,
+    subject: "과학",
+    name: "지구와 바다",
+    oneLiner: "밀물과 썰물 시뮬레이터로 바다의 움직임을 눈으로 확인하는 단원",
+    restructureNote:
+      "교과서 순서 대신, 시뮬레이터로 먼저 현상을 관찰한 뒤 원리를 설명하는 순서로 재구성했다.",
+  },
+  {
+    id: "u2",
+    grade: 5,
+    semester: 1,
+    subject: "과학",
+    name: "생물과 환경",
+    oneLiner: "먹이사슬 서바이벌 게임으로 생태계 평형을 몸으로 느끼는 단원",
+    restructureNote: "",
+  },
+  {
+    id: "u3",
+    grade: 4,
+    semester: 1,
+    subject: "과학",
+    name: "갯벌과 생물",
+    oneLiner: "갯벌 탐험대 웹앱으로 갯벌 생물의 적응을 탐구하는 단원",
+    restructureNote: "",
+  },
+  {
+    id: "u4",
+    grade: 6,
+    semester: 2,
+    subject: "실과",
+    name: "디지털 탐구실",
+    oneLiner: "이지메이커 센서로 실시간 그래프를 그려 보는 디지털 탐구 활동",
+    restructureNote: "실과 소프트웨어 단원과 과학 탐구 단원을 엮어 재구성했다.",
+  },
+];
+
+const LESSONS = [
+  {
+    id: "l1",
+    unitId: "u1",
+    no: "5/10차시",
+    noIndex: 5,
+    title: "밀물과 썰물은 왜 생길까?",
+    date: "2026-05-12",
+    target: "3학년 2개 반, 44명",
+    standards: [
+      { code: "4과15-02", text: "달과 지구, 태양의 상대적 위치에 따라 밀물과 썰물이 생기는 과정을 설명할 수 있다." },
+    ],
+    objective: "밀물과 썰물 시뮬레이터로 바닷물 높이가 바뀌는 모습을 관찰하고, 그 이유를 설명할 수 있다.",
+    materials: "노트북 또는 태블릿(모둠당 1대), 활동지",
+    flow: [
+      { stage: "도입", activity: "바닷가 사진 보기", teaching: "밀물·썰물 때 바닷가 사진을 비교하며 궁금한 점 나누기", minutes: 5, note: "사진 2장 준비" },
+      { stage: "전개", activity: "시뮬레이터 탐색", teaching: "모둠별로 시뮬레이터를 조작하며 바닷물 높이 변화 관찰, 활동지에 기록", minutes: 20, note: "밀물썰물 시뮬레이터(바이브코딩)" },
+      { stage: "전개", activity: "원리 정리", teaching: "관찰 결과를 바탕으로 밀물·썰물이 생기는 이유를 모둠 토의로 설명", minutes: 10, note: "" },
+      { stage: "정리", activity: "생각 나누기", teaching: "오늘 배운 내용을 한 문장으로 정리해 발표", minutes: 5, note: "" },
+    ],
+    tools: [
+      {
+        name: "밀물썰물 시뮬레이터",
+        link: "#",
+        desc: "시간에 따라 바닷물 높이가 바뀌는 모습을 직접 조작해 보는 웹앱",
+        method: "바이브코딩(클로드 코드) · GitHub Pages 배포",
+      },
+    ],
+    fileLinks: [
+      { name: "활동지(한글)", url: "#" },
+      { name: "수업 PPT", url: "#" },
+    ],
+    photos: [
+      { caption: "모둠별로 시뮬레이터를 조작하는 모습" },
+      { caption: "활동지에 관찰 내용을 기록하는 모습" },
+    ],
+    evaluation: "활동지의 관찰 기록과 모둠 토의 발표로 이해 정도를 확인한다.",
+    reflection: {
+      good: "직접 조작해 보니 반 전체가 집중해서 관찰했다.",
+      regret: "모둠당 기기가 1대라 조작 순서를 기다리는 시간이 길었다.",
+      reaction: "\"바다가 움직이는 걸 처음 봤어요\"라는 반응이 많았다.",
+      next: "다음에는 개인 기기로 바꾸거나 조작 순서를 미리 정해 줄 것.",
+    },
+    tags: ["시뮬레이터", "바다", "바이브코딩"],
+    visibility: "공개",
+    appliedCount: 3,
+    reviews: [
+      { grade: "3학년", change: "모둠 수를 6개에서 4개로 줄여 기기 부족 문제를 해결했어요.", reaction: "아이들이 교대로 조작하니 덜 답답해했습니다.", date: "2026-06-02" },
+    ],
+    comments: [
+      { author: "바다반선생님", type: "질문", content: "시뮬레이터에서 날짜를 임의로 바꿀 수 있나요?", answered: true, date: "2026-05-20" },
+      { author: "초록교실", type: "응원", content: "저도 다음 학기에 써 보고 싶어요!", answered: null, date: "2026-05-22" },
+    ],
+    history: [
+      { date: "2026-06-05", change: "모둠 수를 줄이고 조작 순서 안내를 추가함", by: "바다반선생님 제안" },
+    ],
+  },
+  {
+    id: "l2",
+    unitId: "u2",
+    no: "3/8차시",
+    noIndex: 3,
+    title: "먹이그물 속에서 살아남기",
+    date: "2026-04-10",
+    target: "5학년 3개 반, 66명",
+    standards: [
+      { code: "6과03-02", text: "생태계 구성 요소를 생산자, 소비자, 분해자로 분류하고 먹이 관계를 설명할 수 있다." },
+    ],
+    objective: "먹이사슬 서바이벌 게임을 통해 한 생물의 변화가 생태계 전체에 미치는 영향을 설명할 수 있다.",
+    materials: "노트북(1인 1대 권장), 생태계 역할 카드",
+    flow: [
+      { stage: "도입", activity: "역할 카드 뽑기", teaching: "생산자·소비자·분해자 역할 카드를 뽑아 자신의 역할 확인", minutes: 5, note: "" },
+      { stage: "전개", activity: "서바이벌 게임", teaching: "먹이사슬 서바이벌 웹앱으로 개체 수 변화에 따른 생태계 균형 체험", minutes: 25, note: "먹이사슬 서바이벌(바이브코딩)" },
+      { stage: "정리", activity: "균형 그림 그리기", teaching: "오늘 체험한 먹이 관계를 그림으로 표현", minutes: 10, note: "" },
+    ],
+    tools: [
+      {
+        name: "먹이사슬 서바이벌",
+        link: "#",
+        desc: "개체 수를 조절하며 생태계 균형을 체험하는 시뮬레이션 게임",
+        method: "바이브코딩(클로드 코드) · GitHub Pages 배포",
+      },
+    ],
+    fileLinks: [{ name: "역할 카드 PDF", url: "#" }],
+    photos: [{ caption: "모둠별로 게임 결과를 비교하는 모습" }],
+    evaluation: "게임 후 그림 표현과 모둠 설명으로 먹이 관계 이해도를 확인한다.",
+    reflection: {
+      good: "한 종이 사라졌을 때의 변화를 다들 놀라워하며 몰입했다.",
+      regret: "게임 조작법 설명에 예상보다 시간이 더 걸렸다.",
+      reaction: "\"토끼가 없어지니 다 같이 망했어요\"라는 반응.",
+      next: "조작법은 짧은 영상으로 미리 안내할 것.",
+    },
+    tags: ["서바이벌", "생태계", "바이브코딩"],
+    visibility: "공개",
+    appliedCount: 5,
+    reviews: [],
+    comments: [
+      { author: "들꽃반", type: "제안", content: "역할 카드에 그림을 추가하면 저학년도 쓸 수 있을 것 같아요.", answered: false, date: "2026-04-18" },
+    ],
+    history: [],
+  },
+  {
+    id: "l3",
+    unitId: "u3",
+    no: "2/6차시",
+    noIndex: 2,
+    title: "갯벌 생물은 어떻게 숨을까?",
+    date: "2026-05-28",
+    target: "4학년 2개 반, 42명",
+    standards: [
+      { code: "4과09-01", text: "생물이 서식지 환경에 적응한 예를 조사하여 발표할 수 있다." },
+    ],
+    objective: "갯벌 탐험대 웹앱으로 갯벌 생물의 생김새와 생활 방식의 관계를 설명할 수 있다.",
+    materials: "태블릿(모둠당 1대), 관찰 기록지",
+    flow: [
+      { stage: "도입", activity: "갯벌 영상 보기", teaching: "짧은 갯벌 영상을 보고 아는 생물 말하기", minutes: 5, note: "" },
+      { stage: "전개", activity: "갯벌 탐험대 탐색", teaching: "웹앱 속 갯벌을 탐험하며 생물별 적응 특징 찾기", minutes: 20, note: "갯벌 탐험대(바이브코딩)" },
+      { stage: "정리", activity: "짝과 설명하기", teaching: "찾은 생물 중 하나를 골라 짝에게 적응 특징 설명", minutes: 10, note: "" },
+    ],
+    tools: [
+      {
+        name: "갯벌 탐험대",
+        link: "#",
+        desc: "갯벌 속 생물을 클릭해 생김새와 서식 특징을 살펴보는 웹앱",
+        method: "바이브코딩(클로드 코드) · GitHub Pages 배포",
+      },
+    ],
+    fileLinks: [{ name: "관찰 기록지", url: "#" }],
+    photos: [],
+    evaluation: "관찰 기록지와 짝 설명 활동으로 적응 개념 이해를 확인한다.",
+    reflection: {
+      good: "",
+      regret: "",
+      reaction: "",
+      next: "",
+    },
+    tags: ["갯벌", "적응", "바이브코딩"],
+    visibility: "비공개",
+    appliedCount: 0,
+    reviews: [],
+    comments: [],
+    history: [],
+  },
+  {
+    id: "l4",
+    unitId: "u4",
+    no: "4/12차시",
+    noIndex: 4,
+    title: "온도 센서로 교실 공기 재기",
+    date: "2026-09-15",
+    target: "6학년 1개 반, 21명",
+    standards: [
+      { code: "6실04-08", text: "센서를 활용해 생활 속 정보를 수집하고 그래프로 표현할 수 있다." },
+    ],
+    objective: "이지메이커 온도 센서로 교실 곳곳의 온도를 측정하고 실시간 그래프로 비교할 수 있다.",
+    materials: "이지메이커 센서 키트(모둠당 1대), 교실 배치도",
+    flow: [
+      { stage: "도입", activity: "궁금한 자리 정하기", teaching: "교실에서 온도가 다를 것 같은 자리를 예상해 보기", minutes: 5, note: "" },
+      { stage: "전개", activity: "센서로 측정하기", teaching: "디지털 탐구실 앱으로 센서 값을 실시간 그래프로 확인하며 자리별 측정", minutes: 20, note: "디지털 탐구실(이지메이커 센서)" },
+      { stage: "전개", activity: "결과 비교", teaching: "모둠별 그래프를 모아 자리에 따른 온도 차이 이야기하기", minutes: 10, note: "" },
+      { stage: "정리", activity: "원인 추리", teaching: "온도 차이가 생긴 이유를 추리해 발표", minutes: 5, note: "" },
+    ],
+    tools: [
+      {
+        name: "디지털 탐구실",
+        link: "#",
+        desc: "이지메이커 센서 값을 실시간 그래프로 보여주는 탐구 웹앱",
+        method: "바이브코딩(클로드 코드) · ezmaker-digital-lab-builder",
+      },
+    ],
+    fileLinks: [{ name: "교실 배치도", url: "#" }],
+    photos: [
+      { caption: "창가 자리에서 센서로 온도를 재는 모습" },
+      { caption: "실시간 그래프를 함께 보는 모습" },
+    ],
+    evaluation: "모둠별 측정 그래프와 원인 추리 발표로 평가한다.",
+    reflection: {
+      good: "실시간으로 그래프가 그려지는 걸 보며 다들 신기해했다.",
+      regret: "센서 연결이 불안정한 모둠이 있어 시간이 지체됐다.",
+      reaction: "",
+      next: "센서 연결은 수업 전 미리 확인해 둘 것.",
+    },
+    tags: ["센서", "디지털 탐구실", "그래프"],
+    visibility: "공개",
+    appliedCount: 1,
+    reviews: [
+      { grade: "6학년", change: "교실 대신 운동장 여러 지점을 측정하는 걸로 바꿔 봤어요.", reaction: "그늘과 햇빛의 온도 차이에 아이들이 놀랐습니다.", date: "2026-09-29" },
+    ],
+    comments: [],
+    history: [
+      { date: "2026-09-20", change: "센서 연결 사전 점검 안내를 수업 자료에 추가함", by: "" },
+    ],
+  },
+];
+
+function getUnit(unitId) {
+  return UNITS.find((u) => u.id === unitId);
+}
+
+function getLesson(lessonId) {
+  return LESSONS.find((l) => l.id === lessonId);
+}
