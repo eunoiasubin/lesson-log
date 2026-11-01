@@ -1,12 +1,6 @@
-/* 1단계 화면 뼈대용 예시 데이터. 2단계에서 Firestore 호출로 교체한다. */
+/* 1단계에서 쓰던 예시 데이터. Firestore에 처음 넣을 때만 쓰는 시드용 파일이다. */
 
-const SITE = {
-  name: "수업기록장",
-  nameNote: "가칭",
-  tagline: "바이브코딩으로 만든 수업 도구와 실제 수업 과정을 차시별로 기록하고 나눕니다.",
-};
-
-const UNITS = [
+export const UNITS = [
   {
     id: "u1",
     grade: 3,
@@ -46,7 +40,7 @@ const UNITS = [
   },
 ];
 
-const LESSONS = [
+export const LESSONS = [
   {
     id: "l1",
     unitId: "u1",
@@ -240,11 +234,3 @@ const LESSONS = [
     ],
   },
 ];
-
-function getUnit(unitId) {
-  return UNITS.find((u) => u.id === unitId);
-}
-
-function getLesson(lessonId) {
-  return LESSONS.find((l) => l.id === lessonId);
-}

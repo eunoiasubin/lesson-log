@@ -1,10 +1,17 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { renderHeaderFooter, subjectClass } from "./main.js";
+import { fetchUnits, fetchLessons, findUnit, findLesson } from "./store.js";
+import { SITE } from "./site.js";
+
+document.addEventListener("DOMContentLoaded", async () => {
   renderHeaderFooter("list");
+
+  const [units, lessons] = await Promise.all([fetchUnits(), fetchLessons()]);
 
   const params = new URLSearchParams(window.location.search);
   const requestedId = params.get("id");
-  const lesson = getLesson(requestedId) || LESSONS[0];
-  const unit = getUnit(lesson.unitId);
+  const lesson = findLesson(lessons, requestedId) || lessons[0];
+  if (!lesson) return;
+  const unit = findUnit(units, lesson.unitId);
 
   document.title = `${lesson.title} — ${SITE.name}`;
 
@@ -184,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderLessonNav() {
-    const sorted = [...LESSONS].sort((a, b) => a.id.localeCompare(b.id));
+    const sorted = [...lessons].sort((a, b) => a.id.localeCompare(b.id));
     const idx = sorted.findIndex((l) => l.id === lesson.id);
     const prev = sorted[idx - 1];
     const next = sorted[idx + 1];

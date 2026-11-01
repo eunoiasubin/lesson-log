@@ -1,4 +1,6 @@
-function renderHeaderFooter(activePage) {
+import { SITE } from "./site.js";
+
+export function renderHeaderFooter(activePage) {
   const headerMount = document.getElementById("siteHeader");
   const footerMount = document.getElementById("siteFooter");
 
@@ -36,12 +38,11 @@ function renderHeaderFooter(activePage) {
   }
 }
 
-function subjectClass(subject) {
+export function subjectClass(subject) {
   return "subj-" + subject.replace(/\s+/g, ".");
 }
 
-function lessonCardHTML(lesson) {
-  const unit = getUnit(lesson.unitId);
+export function lessonCardHTML(lesson, unit) {
   return `
     <a class="index-card" href="lesson.html?id=${lesson.id}">
       <span class="card-tab ${subjectClass(unit.subject)}">${unit.subject}</span>

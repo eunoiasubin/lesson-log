@@ -1,5 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { renderHeaderFooter, lessonCardHTML } from "./main.js";
+import { fetchUnits, fetchLessons, findUnit } from "./store.js";
+
+document.addEventListener("DOMContentLoaded", async () => {
   renderHeaderFooter("list");
+
+  const [units, lessons] = await Promise.all([fetchUnits(), fetchLessons()]);
+  const published = lessons.filter((l) => l.visibility === "공개");
 
   const gradeSel = document.getElementById("filterGrade");
   const subjectSel = document.getElementById("filterSubject");
@@ -9,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("listGrid");
   const count = document.getElementById("listCount");
 
-  const subjects = [...new Set(UNITS.map((u) => u.subject))];
+  const subjects = [...new Set(units.map((u) => u.subject))];
   subjectSel.innerHTML =
     '<option value="">과목 전체</option>' +
     subjects.map((s) => `<option value="${s}">${s}</option>`).join("");
 
-  const grades = [...new Set(UNITS.map((u) => u.grade))].sort();
+  const grades = [...new Set(units.map((u) => u.grade))].sort((a, b) => a - b);
   gradeSel.innerHTML =
     '<option value="">학년 전체</option>' +
     grades.map((g) => `<option value="${g}">${g}학년</option>`).join("");
@@ -25,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const semester = semesterSel.value;
     const keyword = searchInput.value.trim().toLowerCase();
 
-    const visible = LESSONS.filter((l) => l.visibility === "공개").filter((l) => {
-      const unit = getUnit(l.unitId);
+    const visible = published.filter((l) => {
+      const unit = findUnit(units, l.unitId);
       if (grade && String(unit.grade) !== grade) return false;
       if (subject && unit.subject !== subject) return false;
       if (semester && String(unit.semester) !== semester) return false;
@@ -50,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       const old = document.getElementById("emptyState");
       if (old) old.remove();
-      grid.innerHTML = visible.map(lessonCardHTML).join("");
+      grid.innerHTML = visible.map((l) => lessonCardHTML(l, findUnit(units, l.unitId))).join("");
     }
   }
 

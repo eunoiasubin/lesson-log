@@ -1,8 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { renderHeaderFooter, subjectClass, lessonCardHTML } from "./main.js";
+import { fetchUnits, fetchLessons, findUnit } from "./store.js";
+
+document.addEventListener("DOMContentLoaded", async () => {
   renderHeaderFooter("home");
 
-  const featured = LESSONS.find((l) => l.visibility === "공개") || LESSONS[0];
-  const featuredUnit = getUnit(featured.unitId);
+  const [units, lessons] = await Promise.all([fetchUnits(), fetchLessons()]);
+  const published = lessons.filter((l) => l.visibility === "공개");
+
+  const featured = published[0] || lessons[0];
+  if (!featured) return;
+
+  const featuredUnit = findUnit(units, featured.unitId);
   const heroCard = document.getElementById("heroCard");
   heroCard.innerHTML = `
     <a class="index-card" href="lesson.html?id=${featured.id}">
@@ -18,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     </a>
   `;
 
-  const recent = LESSONS.filter((l) => l.visibility === "공개").slice(0, 3);
-  document.getElementById("recentGrid").innerHTML = recent.map(lessonCardHTML).join("");
+  const recent = published.slice(0, 3);
+  document.getElementById("recentGrid").innerHTML = recent
+    .map((l) => lessonCardHTML(l, findUnit(units, l.unitId)))
+    .join("");
 });

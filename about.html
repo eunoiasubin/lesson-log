@@ -60,9 +60,8 @@
 
 <footer class="site-footer" id="siteFooter"></footer>
 
-<script src="assets/js/data.js"></script>
-<script src="assets/js/main.js"></script>
-<script>
+<script type="module">
+  import { renderHeaderFooter } from "./assets/js/main.js";
   document.addEventListener("DOMContentLoaded", () => renderHeaderFooter("about"));
 </script>
 </body>
