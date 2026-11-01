@@ -108,6 +108,27 @@ button {
   margin: 0 auto;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+
+.member-name {
+  color: var(--ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .site-mark {
   display: flex;
   align-items: baseline;
@@ -1119,12 +1140,28 @@ button {
   pointer-events: none;
 }
 
+/* 마이페이지 */
+.mypage-section {
+  padding: 26px 0;
+  border-top: 1px solid var(--border);
+}
+.mypage-section:first-of-type { border-top: none; padding-top: 10px; }
+.mypage-section h2 { font-size: 1.1rem; margin-bottom: 8px; }
+.mypage-danger { padding-bottom: 40px; }
+
 /* ===== 인쇄 ===== */
 @media print {
-  .site-header, .site-footer, .lesson-rail .rail-links,
+  .site-header, .site-footer,
   .lesson-actions, .lesson-nav, .review-banner, .comment-form-stub,
   #commentsSection, #reviewsSection, .filter-bar { display: none !important; }
   body { background: #fff; }
-  .lesson-layout { grid-template-columns: 1fr; }
+  .lesson-layout { grid-template-columns: 1fr; padding-top: 8px; }
+  .lesson-rail { position: static; }
   a { color: var(--ink); text-decoration: none; }
+
+  .rail-objective, .tool-card, .file-list li, .reflect-item, .admin-list-item {
+    background: none;
+    border-color: #ccc;
+  }
+  .index-card:hover { transform: none; }
 }

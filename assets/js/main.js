@@ -1,6 +1,6 @@
 import { SITE } from "./site.js";
 
-export function renderHeaderFooter(activePage) {
+export function renderHeaderFooter(activePage, { showMemberAuth = true } = {}) {
   const headerMount = document.getElementById("siteHeader");
   const footerMount = document.getElementById("siteFooter");
 
@@ -8,16 +8,19 @@ export function renderHeaderFooter(activePage) {
     headerMount.innerHTML = `
       <div class="nav-bar">
         <a class="site-mark" href="index.html">${SITE.name} <small>${SITE.nameNote}</small></a>
-        <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
-          <span></span>
-        </button>
-        <nav aria-label="주요 메뉴">
-          <ul class="nav-links" id="navLinks">
-            <li><a href="index.html" ${activePage === "home" ? 'aria-current="page"' : ""}>홈</a></li>
-            <li><a href="list.html" ${activePage === "list" ? 'aria-current="page"' : ""}>수업 목록</a></li>
-            <li><a href="about.html" ${activePage === "about" ? 'aria-current="page"' : ""}>소개</a></li>
-          </ul>
-        </nav>
+        <div class="nav-right">
+          <nav aria-label="주요 메뉴">
+            <ul class="nav-links" id="navLinks">
+              <li><a href="index.html" ${activePage === "home" ? 'aria-current="page"' : ""}>홈</a></li>
+              <li><a href="list.html" ${activePage === "list" ? 'aria-current="page"' : ""}>수업 목록</a></li>
+              <li><a href="about.html" ${activePage === "about" ? 'aria-current="page"' : ""}>소개</a></li>
+            </ul>
+          </nav>
+          <div class="auth-area" id="authArea"></div>
+          <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+            <span></span>
+          </button>
+        </div>
       </div>
     `;
     const toggle = document.getElementById("navToggle");
@@ -26,6 +29,12 @@ export function renderHeaderFooter(activePage) {
       const isOpen = links.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(isOpen));
     });
+
+    if (showMemberAuth) {
+      import("./member.js").then(({ mountAuthArea }) => {
+        mountAuthArea(document.getElementById("authArea"));
+      });
+    }
   }
 
   if (footerMount) {

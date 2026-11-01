@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>마이페이지 — 수업기록장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<header class="site-header" id="siteHeader"></header>
+
+<main class="wrap admin-shell">
+  <div id="mypageGate"></div>
+
+  <div id="mypagePanel" hidden>
+    <div class="admin-topbar">
+      <div>
+        <h1 id="mypageNickname"></h1>
+        <p id="mypageMeta" class="admin-whoami"></p>
+      </div>
+    </div>
+
+    <section class="mypage-section">
+      <h2>북마크</h2>
+      <p class="field-note">7단계(댓글·후기·북마크)에서 연결됩니다.</p>
+    </section>
+
+    <section class="mypage-section">
+      <h2>내가 쓴 댓글·적용 후기</h2>
+      <p class="field-note">7단계(댓글·후기·북마크)에서 연결됩니다.</p>
+    </section>
+
+    <section class="mypage-section">
+      <h2>알림</h2>
+      <p class="field-note">8단계(알림과 관리)에서 연결됩니다.</p>
+    </section>
+
+    <section class="mypage-section mypage-danger">
+      <h2>회원 탈퇴</h2>
+      <p class="field-note">탈퇴하면 회원 정보, 북마크, 알림이 지워집니다. 남긴 댓글은 '탈퇴한 회원'으로 표시됩니다.</p>
+      <button type="button" class="icon-btn danger-btn" id="withdrawBtn">회원 탈퇴</button>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer" id="siteFooter"></footer>
+
+<script type="module" src="assets/js/mypage.js"></script>
+</body>
+</html>

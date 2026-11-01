@@ -18,7 +18,7 @@ let standardsRepeater, flowRepeater, toolsRepeater, fileLinksRepeater;
 let pendingPhotos = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderHeaderFooter("");
+  renderHeaderFooter("", { showMemberAuth: false });
   wireStaticControls();
   initRepeaters();
   wireAuthGate();
